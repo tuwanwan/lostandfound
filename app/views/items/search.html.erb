@@ -1,0 +1,57 @@
+<h2>Search Conditions</h2>
+<%= form_tag(search_items_path, method: "get") do %>
+   
+  <br>
+  <%= label_tag(:q, "Search for:") %>
+  <%= select_tag(:opt_id, options_for_select([['All of these conditions(AND)', 2], ['Any of these conditions(OR)', 1]])) %>
+  <br>
+
+  <%= label_tag(:q, "Title:") %>
+  <%= text_field_tag(:title) %>
+  <br>
+
+  <%= label_tag(:q, "Description:") %>
+  <%= text_field_tag(:description) %>
+  <br>
+
+  <%= label_tag(:q, "Owner:") %>
+  <%= text_field_tag(:owner) %>
+  <br>
+
+  <%= label_tag(:q, "Type:") %>
+  <%= collection_select(:item, :type_id, Type.all, :id, :title) %>
+  <br>
+  <br>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if @results %>
+  <h2>Search Results</h2>
+  <table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Owner</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= item.owner %></td>
+        <td><%= item.type.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<%= link_to 'Back', items_path %>
+
+
+
+
