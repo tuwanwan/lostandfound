@@ -1,19 +1,13 @@
 class ItemsController < ApplicationController
  
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+
   # below written by wz
   def search
     if params[:opt_id]
       @results = result
     end
   end
-  # def search
-  #   @search = "search"
-  #   @item ||= find_items
-  # end
-
-
-
   # up written by wz
 
   # GET /items
